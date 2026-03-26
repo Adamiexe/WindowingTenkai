@@ -4,13 +4,11 @@
 int main() {
     std::cout << "starting..." << std::endl;
 
-    // Choose the platform API to use for windowing
-    PAPI desiredApi = PAPI::GLFW;
-
-    IWindowManager& windowManager = GetWindowManager(desiredApi);
+    IWindowManager& windowManager = GetWindowManager(PAPI:: GLFW);
     int myWindowID = windowManager.CreateWindow(800, 600, "Glfw");
 
     if (myWindowID == -1) {
+        std::cout << "window not managed to initialize" << std::endl;
         return -1;
     }
 
