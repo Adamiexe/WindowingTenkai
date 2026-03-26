@@ -11,6 +11,7 @@ if(NOT glfw_ADDED)
     CPMAddPackage(
         NAME glfw
         GITHUB_REPOSITORY glfw/glfw
+        SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/libraries/glfw"
         GIT_TAG 3.4
         OPTIONS
             "GLFW_BUILD_EXAMPLES OFF"
