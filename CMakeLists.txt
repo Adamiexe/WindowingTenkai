@@ -12,7 +12,10 @@ if(NOT glfw_ADDED)
         NAME glfw
         GITHUB_REPOSITORY glfw/glfw
         GIT_TAG 3.4
-        SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/libraries/glfw"
+        OPTIONS
+            "GLFW_BUILD_EXAMPLES OFF"
+            "GLFW_BUILD_TESTS OFF"
+            "GLFW_BUILD_DOCS OFF"
     )
 endif()
 
@@ -23,22 +26,10 @@ add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 target_include_directories(${PROJECT_NAME}
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/source/include
-        ${CMAKE_CURRENT_SOURCE_DIR}/libraries/glfw/include
 )
 
-find_package(glfw3 QUIET CONFIG)
-if(NOT glfw3_FOUND)
-    find_package(GLFW3 QUIET)
-endif()
-
-if(TARGET glfw3::glfw)
-    target_link_libraries(${PROJECT_NAME} PRIVATE glfw3::glfw)
-elseif(TARGET glfw)
+if(TARGET glfw)
     target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
-elseif(glfw3_FOUND)
-    if(DEFINED GLFW3_LIBRARIES)
-        target_link_libraries(${PROJECT_NAME} PRIVATE ${GLFW3_LIBRARIES})
-    endif()
 else()
-    message(STATUS "GLFW not found..")
+    message(FATAL_ERROR "Erreur : GLFW n'a pas pu être configuré par CPM.")
 endif()

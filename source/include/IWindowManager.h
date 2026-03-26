@@ -15,3 +15,5 @@ public:
     virtual void Update() = 0;
     virtual bool IsWindowOpen(int windowID) = 0;
 };
+
+IWindowManager& GetWindowManager(PAPI api);

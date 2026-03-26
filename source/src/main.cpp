@@ -1,9 +1,13 @@
-#include "glfw/GLFWWindowManager.h"
+#include "IWindowManager.h"
 #include <iostream>
 
 int main() {
     std::cout << "starting..." << std::endl;
-    GLFWWindowManager& windowManager = GLFWWindowManager::GetInstance();
+
+    // Choose the platform API to use for windowing
+    PAPI desiredApi = PAPI::GLFW;
+
+    IWindowManager& windowManager = GetWindowManager(desiredApi);
     int myWindowID = windowManager.CreateWindow(800, 600, "Glfw");
 
     if (myWindowID == -1) {

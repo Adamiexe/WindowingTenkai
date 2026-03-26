@@ -3,6 +3,16 @@
 #include <iostream>
 #include <stdexcept>
 
+IWindowManager& GetWindowManager(PAPI api) {
+    switch (api) {
+        case PAPI::GLFW:
+            return GLFWWindowManager::GetInstance();
+        case PAPI::SDL:
+        default:
+            throw std::runtime_error("Selected PAPI is not implemented yet");
+    }
+}
+
 GLFWWindowManager& GLFWWindowManager::GetInstance() {
     static GLFWWindowManager instance;
     return instance;
