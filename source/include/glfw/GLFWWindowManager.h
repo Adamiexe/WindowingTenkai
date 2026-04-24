@@ -6,7 +6,7 @@ struct GLFWwindow;
 
 class GLFWWindowManager : public IWindowManager {
 private:
-    std::vector<GLFWwindow*> m_windows;
+    std::vector<GLFWwindow*> windows;
     GLFWWindowManager();
     GLFWWindowManager(const GLFWWindowManager&) = delete;
     GLFWWindowManager& operator=(const GLFWWindowManager&) = delete;
@@ -21,4 +21,10 @@ public:
     void DestroyWindow(int windowID) override;
     void Update() override;
     bool IsWindowOpen(int windowID) override;
+    virtual void SetWindowSize(int windowID, int width, int height)override;
+    virtual void SetWindowPos(int windowID, int xpos, int ypos) override;
+    virtual void GetWindowPos(int windowID, int& xpos, int& ypos) override;
+    virtual int  GetWindowAttrib(int windowID, int attrib) override;
+    virtual void RestoreWindow(int windowID) override;
+    virtual void MaximizeWindow(int windowID) override;
 };

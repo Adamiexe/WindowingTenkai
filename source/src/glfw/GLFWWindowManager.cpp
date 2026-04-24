@@ -25,7 +25,7 @@ GLFWWindowManager::GLFWWindowManager() {
 }
 
 GLFWWindowManager::~GLFWWindowManager() {
-    for (GLFWwindow* window : m_windows) {
+    for (GLFWwindow* window :windows) {
         if (window != nullptr) {
             glfwDestroyWindow(window);
         }
@@ -42,20 +42,20 @@ int GLFWWindowManager::CreateWindow(int width, int height, const std::string& ti
     }
 
     glfwMakeContextCurrent(window);
-    m_windows.push_back(window);
-    return static_cast<int>(m_windows.size() - 1);
+    windows.push_back(window);
+    return static_cast<int>(windows.size() - 1);
 }
 
 void GLFWWindowManager::DestroyWindow(int windowID) {
-    if (windowID >= 0 && windowID < static_cast<int>(m_windows.size()) && m_windows[windowID] != nullptr) {
-        glfwDestroyWindow(m_windows[windowID]);
-        m_windows[windowID] = nullptr;
+    if (windowID >= 0 && windowID < static_cast<int>(windows.size()) && windows[windowID] != nullptr) {
+        glfwDestroyWindow(windows[windowID]);
+        windows[windowID] = nullptr;
     }
 }
 
 void GLFWWindowManager::Update() {
     glfwPollEvents();
-    for (GLFWwindow* window : m_windows) {
+    for (GLFWwindow* window : windows) {
         if (window != nullptr) {
             glfwSwapBuffers(window);
         }
@@ -63,8 +63,49 @@ void GLFWWindowManager::Update() {
 }
 
 bool GLFWWindowManager::IsWindowOpen(int windowID) {
-    if (windowID >= 0 && windowID < static_cast<int>(m_windows.size()) && m_windows[windowID] != nullptr) {
-        return !glfwWindowShouldClose(m_windows[windowID]);
+    if (windowID >= 0 && windowID < static_cast<int>(windows.size()) && windows[windowID] != nullptr) {
+        return !glfwWindowShouldClose(windows[windowID]);
     }
     return false;
+}
+
+void GLFWWindowManager::SetWindowSize(int windowID, int width, int height) {
+    if (windowID >= 0 && windowID < windows.size() && windows[windowID] != nullptr) {
+        glfwSetWindowSize(windows[windowID], width, height);
+    }
+}
+
+void GLFWWindowManager::SetWindowPos(int windowID, int xpos, int ypos) {
+    if (windowID >= 0 && windowID < windows.size() && windows[windowID] != nullptr) {
+        glfwSetWindowPos(windows[windowID], xpos, ypos);
+    }
+}
+
+void GLFWWindowManager::GetWindowPos(int windowID, int& xpos, int& ypos) {
+    if (windowID >= 0 && windowID < windows.size() && windows[windowID] != nullptr) {
+        glfwGetWindowPos(windows[windowID], &xpos, &ypos);
+    }
+    else {
+        xpos = 0;
+        ypos = 0;
+    }
+}
+
+int GLFWWindowManager::GetWindowAttrib(int windowID, int attrib) {
+    if (windowID >= 0 && windowID < windows.size() && windows[windowID] != nullptr) {
+        return glfwGetWindowAttrib(windows[windowID], attrib);
+    }
+    return 0;
+}
+
+void GLFWWindowManager::RestoreWindow(int windowID) {
+    if (windowID >= 0 && windowID < windows.size() && windows[windowID] != nullptr) {
+        glfwRestoreWindow(windows[windowID]);
+    }
+}
+
+void GLFWWindowManager::MaximizeWindow(int windowID) {
+    if (windowID >= 0 && windowID < windows.size() && windows[windowID] != nullptr) {
+        glfwMaximizeWindow(windows[windowID]);
+    }
 }
