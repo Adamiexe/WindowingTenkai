@@ -27,4 +27,8 @@ public:
     virtual int  GetWindowAttrib(int windowID, int attrib) override;
     virtual void RestoreWindow(int windowID) override;
     virtual void MaximizeWindow(int windowID) override;
+    void SetErrorCallback() override;
+    void WindowHint(int hint, int value) override;
+    void* GetPrimaryMonitor() override;
+    void GetVideoMode(void* monitor, int& width, int& height, int& refreshRate) override;
 };

@@ -109,3 +109,35 @@ void GLFWWindowManager::MaximizeWindow(int windowID) {
         glfwMaximizeWindow(windows[windowID]);
     }
 }
+
+void GLFWWindowManager::SetErrorCallback() {
+    glfwSetErrorCallback([](int error, const char* description) {
+        std::cerr << "GLFW Error (" << error << "): " << description << std::endl;
+        });
+}
+
+void GLFWWindowManager::WindowHint(int hint, int value) {
+    glfwWindowHint(hint, value);
+}
+
+void* GLFWWindowManager::GetPrimaryMonitor() {
+    return glfwGetPrimaryMonitor();
+}
+
+void GLFWWindowManager::GetVideoMode(void* monitor, int& width, int& height, int& refreshRate) {
+    if (!monitor) {
+        width = 0; height = 0; refreshRate = 0;
+        return;
+    }
+
+    const GLFWvidmode* mode = glfwGetVideoMode(static_cast<GLFWmonitor*>(monitor));
+
+    if (mode) {
+        width = mode->width;
+        height = mode->height;
+        refreshRate = mode->refreshRate;
+    }
+    else {
+        width = 0; height = 0; refreshRate = 0;
+    }
+}

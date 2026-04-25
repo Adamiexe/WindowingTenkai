@@ -20,6 +20,10 @@ public:
     virtual int  GetWindowAttrib(int windowID, int attrib) = 0;
     virtual void RestoreWindow(int windowID) = 0;
     virtual void MaximizeWindow(int windowID) = 0;
+    virtual void SetErrorCallback() = 0;
+    virtual void WindowHint(int hint, int value) = 0;
+    virtual void* GetPrimaryMonitor() = 0;
+    virtual void GetVideoMode(void* monitor, int& width, int& height, int& refreshRate) = 0;
 };
 
 IWindowManager& GetWindowManager(PAPI api);
