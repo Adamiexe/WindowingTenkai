@@ -53,15 +53,6 @@ void GLFWWindowManager::DestroyWindow(int windowID) {
     }
 }
 
-void GLFWWindowManager::Update() {
-    glfwPollEvents();
-    for (GLFWwindow* window : windows) {
-        if (window != nullptr) {
-            glfwSwapBuffers(window);
-        }
-    }
-}
-
 bool GLFWWindowManager::IsWindowOpen(int windowID) {
     if (windowID >= 0 && windowID < static_cast<int>(windows.size()) && windows[windowID] != nullptr) {
         return !glfwWindowShouldClose(windows[windowID]);
@@ -140,4 +131,40 @@ void GLFWWindowManager::GetVideoMode(void* monitor, int& width, int& height, int
     else {
         width = 0; height = 0; refreshRate = 0;
     }
+}
+
+void GLFWWindowManager::PollEvents() {
+    glfwPollEvents();
+}
+
+void GLFWWindowManager::SwapBuffers(int windowID) {
+    if (windowID >= 0 && windowID < windows.size() && windows[windowID] != nullptr) {
+        glfwSwapBuffers(windows[windowID]);
+    }
+}
+
+double GLFWWindowManager::GetTime() {
+    return glfwGetTime();
+}
+
+void GLFWWindowManager::GetFramebufferSize(int windowID, int& width, int& height) {
+    if (windowID >= 0 && windowID < windows.size() && windows[windowID] != nullptr) {
+        glfwGetFramebufferSize(windows[windowID], &width, &height);
+    }
+    else {
+        width = 0; height = 0;
+    }
+}
+
+void* GLFWWindowManager::GetNativeWindow(int windowID) {
+    if (windowID >= 0 && windowID < windows.size()) return windows[windowID];
+    return nullptr;
+}
+
+void* GLFWWindowManager::GetCurrentContext() {
+    return glfwGetCurrentContext();
+}
+
+void GLFWWindowManager::MakeContextCurrent(void* context) {
+    glfwMakeContextCurrent(static_cast<GLFWwindow*>(context));
 }

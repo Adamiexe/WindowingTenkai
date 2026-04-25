@@ -19,7 +19,8 @@ public:
 
     int CreateWindow(int width, int height, const std::string& title) override;
     void DestroyWindow(int windowID) override;
-    void Update() override;
+    void PollEvents() override;
+    void SwapBuffers(int windowID) override;
     bool IsWindowOpen(int windowID) override;
     virtual void SetWindowSize(int windowID, int width, int height)override;
     virtual void SetWindowPos(int windowID, int xpos, int ypos) override;
@@ -31,4 +32,9 @@ public:
     void WindowHint(int hint, int value) override;
     void* GetPrimaryMonitor() override;
     void GetVideoMode(void* monitor, int& width, int& height, int& refreshRate) override;
+    double GetTime() override;
+    void GetFramebufferSize(int windowID, int& width, int& height) override;
+    void* GetNativeWindow(int windowID) override;
+    void* GetCurrentContext() override;
+    void MakeContextCurrent(void* context) override;
 };

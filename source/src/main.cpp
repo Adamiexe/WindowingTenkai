@@ -15,7 +15,8 @@ int main() {
     std::cout << "window created" << std::endl;
 
     while (windowManager.IsWindowOpen(myWindowID)) {
-        windowManager.Update();
+        windowManager.PollEvents();
+        windowManager.SwapBuffers(myWindowID);
     }
 
     std::cout << "closing" << std::endl;

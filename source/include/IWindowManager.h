@@ -12,7 +12,8 @@ public:
 
     virtual int CreateWindow(int width, int height, const std::string& title) = 0;
     virtual void DestroyWindow(int windowID) = 0;
-    virtual void Update() = 0;
+    virtual void PollEvents() = 0;
+    virtual void SwapBuffers(int windowID) = 0;
     virtual bool IsWindowOpen(int windowID) = 0;
     virtual void SetWindowSize(int windowID, int width, int height) = 0;
     virtual void SetWindowPos(int windowID, int xpos, int ypos) = 0;
@@ -24,6 +25,11 @@ public:
     virtual void WindowHint(int hint, int value) = 0;
     virtual void* GetPrimaryMonitor() = 0;
     virtual void GetVideoMode(void* monitor, int& width, int& height, int& refreshRate) = 0;
+    virtual double GetTime() = 0;
+    virtual void GetFramebufferSize(int windowID, int& width, int& height) = 0;
+    virtual void* GetNativeWindow(int windowID) = 0;
+    virtual void* GetCurrentContext() = 0;
+    virtual void MakeContextCurrent(void* context) = 0;
 };
 
 IWindowManager& GetWindowManager(PAPI api);
