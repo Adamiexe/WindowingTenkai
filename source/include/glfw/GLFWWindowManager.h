@@ -6,7 +6,13 @@ struct GLFWwindow;
 
 class GLFWWindowManager : public IWindowManager {
 private:
+    struct WindowCallbacks {
+        KeyCallbackFn key;
+        MouseBtnCallbackFn mouse;
+        CursorPosCallbackFn cursor;
+    };
     std::vector<GLFWwindow*> windows;
+    std::vector<WindowCallbacks> windowCallbacks;
     GLFWWindowManager();
     GLFWWindowManager(const GLFWWindowManager&) = delete;
     GLFWWindowManager& operator=(const GLFWWindowManager&) = delete;
@@ -37,4 +43,7 @@ public:
     void* GetNativeWindow(int windowID) override;
     void* GetCurrentContext() override;
     void MakeContextCurrent(void* context) override;
+    void SetKeyCallback(int windowID, KeyCallbackFn callback) override;
+    void SetMouseButtonCallback(int windowID, MouseBtnCallbackFn callback) override;
+    void SetCursorPosCallback(int windowID, CursorPosCallbackFn callback) override;
 };

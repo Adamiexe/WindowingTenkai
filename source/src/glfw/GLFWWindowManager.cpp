@@ -168,3 +168,40 @@ void* GLFWWindowManager::GetCurrentContext() {
 void GLFWWindowManager::MakeContextCurrent(void* context) {
     glfwMakeContextCurrent(static_cast<GLFWwindow*>(context));
 }
+
+void GLFWWindowManager::SetKeyCallback(int windowID, KeyCallbackFn callback) {
+    if (windowID < 0 || windowID >= windows.size() || !windows[windowID]) return;
+    windowCallbacks[windowID].key = callback;
+
+    glfwSetWindowUserPointer(windows[windowID], (void*)(intptr_t)windowID);
+
+    glfwSetKeyCallback(windows[windowID], [](GLFWwindow* w, int key, int scancode, int action, int mods) {
+        int id = (int)(intptr_t)glfwGetWindowUserPointer(w);
+        auto& cb = GetInstance().windowCallbacks[id].key;
+        if (cb) cb(key, action);
+        });
+}
+
+void GLFWWindowManager::SetMouseButtonCallback(int windowID, MouseBtnCallbackFn callback) {
+    if (windowID < 0 || windowID >= windows.size() || !windows[windowID]) return;
+    windowCallbacks[windowID].mouse = callback;
+
+    glfwSetWindowUserPointer(windows[windowID], (void*)(intptr_t)windowID);
+    glfwSetMouseButtonCallback(windows[windowID], [](GLFWwindow* w, int button, int action, int mods) {
+        int id = (int)(intptr_t)glfwGetWindowUserPointer(w);
+        auto& cb = GetInstance().windowCallbacks[id].mouse;
+        if (cb) cb(button, action);
+        });
+}
+
+void GLFWWindowManager::SetCursorPosCallback(int windowID, CursorPosCallbackFn callback) {
+    if (windowID < 0 || windowID >= windows.size() || !windows[windowID]) return;
+    windowCallbacks[windowID].cursor = callback;
+
+    glfwSetWindowUserPointer(windows[windowID], (void*)(intptr_t)windowID);
+    glfwSetCursorPosCallback(windows[windowID], [](GLFWwindow* w, double xpos, double ypos) {
+        int id = (int)(intptr_t)glfwGetWindowUserPointer(w);
+        auto& cb = GetInstance().windowCallbacks[id].cursor;
+        if (cb) cb(xpos, ypos);
+        });
+}

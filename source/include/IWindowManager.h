@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <functional>
 
 enum class PAPI {
     SDL,
@@ -8,6 +9,10 @@ enum class PAPI {
 
 class IWindowManager {
 public:
+    using KeyCallbackFn = std::function<void(int key, int action)>;
+    using MouseBtnCallbackFn = std::function<void(int button, int action)>;
+    using CursorPosCallbackFn = std::function<void(double xpos, double ypos)>;
+
     virtual ~IWindowManager() = default;
 
     virtual int CreateWindow(int width, int height, const std::string& title) = 0;
@@ -30,6 +35,9 @@ public:
     virtual void* GetNativeWindow(int windowID) = 0;
     virtual void* GetCurrentContext() = 0;
     virtual void MakeContextCurrent(void* context) = 0;
+    virtual void SetKeyCallback(int windowID, KeyCallbackFn callback) = 0;
+    virtual void SetMouseButtonCallback(int windowID, MouseBtnCallbackFn callback) = 0;
+    virtual void SetCursorPosCallback(int windowID, CursorPosCallbackFn callback) = 0;
 };
 
 IWindowManager& GetWindowManager(PAPI api);
