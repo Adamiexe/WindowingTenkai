@@ -43,6 +43,8 @@ int GLFWWindowManager::CreateWindow(int width, int height, const std::string& ti
 
     glfwMakeContextCurrent(window);
     windows.push_back(window);
+    windowCallbacks.push_back({});
+
     return static_cast<int>(windows.size() - 1);
 }
 
