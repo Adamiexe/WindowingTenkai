@@ -13,10 +13,10 @@ endif()
 
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS "source/src/*.cpp")
 file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS "source/include/*.h")
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
 target_include_directories(${PROJECT_NAME}
-    PRIVATE
+    PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/source/include
 )
 
