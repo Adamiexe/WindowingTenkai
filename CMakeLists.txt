@@ -31,5 +31,5 @@ target_include_directories(${PROJECT_NAME}
 if(TARGET glfw)
     target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
 else()
-    message(FATAL_ERROR "Erreur : GLFW n'a pas pu être configuré par CPM.")
+    message(FATAL_ERROR "Erreur : GLFW n'a pas pu ï¿½tre configurï¿½ par CPM.")
 endif()
