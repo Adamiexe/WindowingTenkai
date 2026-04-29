@@ -207,3 +207,7 @@ void GLFWWindowManager::SetCursorPosCallback(int windowID, CursorPosCallbackFn c
         if (cb) cb(xpos, ypos);
         });
 }
+
+void GLFWWindowManager::SetWindowShouldClose(int windowID, int value) {
+    glfwSetWindowShouldClose(windows[windowID],value);
+}

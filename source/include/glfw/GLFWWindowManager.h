@@ -46,4 +46,5 @@ public:
     void SetKeyCallback(int windowID, KeyCallbackFn callback) override;
     void SetMouseButtonCallback(int windowID, MouseBtnCallbackFn callback) override;
     void SetCursorPosCallback(int windowID, CursorPosCallbackFn callback) override;
+    virtual void SetWindowShouldClose(int windowID, int value) override;
 };

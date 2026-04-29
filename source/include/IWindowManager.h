@@ -38,6 +38,7 @@ public:
     virtual void SetKeyCallback(int windowID, KeyCallbackFn callback) = 0;
     virtual void SetMouseButtonCallback(int windowID, MouseBtnCallbackFn callback) = 0;
     virtual void SetCursorPosCallback(int windowID, CursorPosCallbackFn callback) = 0;
+    virtual void SetWindowShouldClose(int windowID, int value);
 };
 
 IWindowManager& GetWindowManager(PAPI api);
