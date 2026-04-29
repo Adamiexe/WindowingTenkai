@@ -7,8 +7,16 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-if(NOT TARGET glfw)
-    add_subdirectory(libraries/glfw)
+if(NOT glfw_ADDED)
+CPMAddPackage(
+    NAME glfw
+    GITHUB_REPOSITORY glfw/glfw
+    GIT_TAG 3.3.8
+    OPTIONS
+        "GLFW_BUILD_DOCS OFF"
+        "GLFW_BUILD_TESTS OFF"
+        "GLFW_BUILD_EXAMPLES OFF"
+)
 endif()
 
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS "source/src/*.cpp")
