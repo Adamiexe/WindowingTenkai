@@ -211,3 +211,7 @@ void GLFWWindowManager::SetCursorPosCallback(int windowID, CursorPosCallbackFn c
 void GLFWWindowManager::SetWindowShouldClose(int windowID, int value) {
     glfwSetWindowShouldClose(windows[windowID],value);
 }
+
+void GLFWWindowManager::IconifyWindow(int windowID) {
+    glfwIconifyWindow(windows[windowID]);
+}
