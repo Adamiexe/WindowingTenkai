@@ -215,3 +215,7 @@ void GLFWWindowManager::SetWindowShouldClose(int windowID, int value) {
 void GLFWWindowManager::IconifyWindow(int windowID) {
     glfwIconifyWindow(windows[windowID]);
 }
+
+void GLFWWindowManager::GetWindowSize(int windowID, int& width, int& height) {
+    glfwGetWindowSize(windows[windowID], &width, &height);
+}
