@@ -22,6 +22,7 @@ public:
     virtual bool IsWindowOpen(int windowID) = 0;
     virtual void SetWindowSize(int windowID, int width, int height) = 0;
     virtual void SetWindowPos(int windowID, int xpos, int ypos) = 0;
+    virtual void GetWindowSize(int windowID, int& width, int& height) = 0;
     virtual void GetWindowPos(int windowID, int& xpos, int& ypos) = 0;
     virtual int  GetWindowAttrib(int windowID, int attrib) = 0;
     virtual void RestoreWindow(int windowID) = 0;
