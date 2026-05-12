@@ -41,6 +41,9 @@ public:
     virtual void SetCursorPosCallback(int windowID, CursorPosCallbackFn callback) = 0;
     virtual void SetWindowShouldClose(int windowID, int value) = 0;
     virtual void IconifyWindow(int windowID) = 0;
+    virtual bool JoystickPresent(int joyID) = 0;
+    virtual const float* GetJoystickAxes(int joyID, int* count) = 0;
+    virtual const unsigned char* GetJoystickButtons(int joyID, int* count) = 0;
 };
 
 IWindowManager& GetWindowManager(PAPI api);
