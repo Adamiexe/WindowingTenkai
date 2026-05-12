@@ -219,3 +219,18 @@ void GLFWWindowManager::IconifyWindow(int windowID) {
 void GLFWWindowManager::GetWindowSize(int windowID, int& width, int& height) {
     glfwGetWindowSize(windows[windowID], &width, &height);
 }
+
+bool GLFWWindowManager::JoystickPresent(int joyID)
+{
+    return glfwJoystickPresent(joyID) == GLFW_TRUE;
+}
+
+const float* GLFWWindowManager::GetJoystickAxes(int joyID, int* count)
+{
+    return glfwGetJoystickAxes(joyID, count);
+}
+
+const unsigned char* GLFWWindowManager::GetJoystickButtons(int joyID, int* count)
+{
+    return glfwGetJoystickButtons(joyID, count);
+}

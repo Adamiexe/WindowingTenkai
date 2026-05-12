@@ -48,5 +48,8 @@ public:
     void SetMouseButtonCallback(int windowID, MouseBtnCallbackFn callback) override;
     void SetCursorPosCallback(int windowID, CursorPosCallbackFn callback) override;
     void SetWindowShouldClose(int windowID, int value) override;
-    void IconifyWindow(int windowID)override;
+    void IconifyWindow(int windowID) override;
+    bool JoystickPresent(int joyID) override;
+    const float* GetJoystickAxes(int joyID, int* count) override;
+    const unsigned char* GetJoystickButtons(int joyID, int* count) override;
 };
