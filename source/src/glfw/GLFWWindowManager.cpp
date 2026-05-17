@@ -208,6 +208,18 @@ void GLFWWindowManager::SetCursorPosCallback(int windowID, CursorPosCallbackFn c
         });
 }
 
+void GLFWWindowManager::SetScrollCallback(int windowID, ScrollCallbackFn callback) {
+    if (windowID < 0 || windowID >= windows.size() || !windows[windowID]) return;
+    windowCallbacks[windowID].scroll = callback;
+
+    glfwSetWindowUserPointer(windows[windowID], (void*)(intptr_t)windowID);
+    glfwSetScrollCallback(windows[windowID], [](GLFWwindow* w, double xoffset, double yoffset) {
+        int id = (int)(intptr_t)glfwGetWindowUserPointer(w);
+        auto& cb = GetInstance().windowCallbacks[id].scroll;
+        if (cb) cb(xoffset, yoffset);
+        });
+}
+
 void GLFWWindowManager::SetWindowShouldClose(int windowID, int value) {
     glfwSetWindowShouldClose(windows[windowID],value);
 }

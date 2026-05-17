@@ -12,6 +12,7 @@ public:
     using KeyCallbackFn = std::function<void(int key, int action)>;
     using MouseBtnCallbackFn = std::function<void(int button, int action)>;
     using CursorPosCallbackFn = std::function<void(double xpos, double ypos)>;
+    using ScrollCallbackFn = std::function<void(double xoffset, double yoffset)>;
 
     virtual ~IWindowManager() = default;
 
@@ -39,6 +40,7 @@ public:
     virtual void SetKeyCallback(int windowID, KeyCallbackFn callback) = 0;
     virtual void SetMouseButtonCallback(int windowID, MouseBtnCallbackFn callback) = 0;
     virtual void SetCursorPosCallback(int windowID, CursorPosCallbackFn callback) = 0;
+    virtual void SetScrollCallback(int windowID, ScrollCallbackFn callback) = 0;
     virtual void SetWindowShouldClose(int windowID, int value) = 0;
     virtual void IconifyWindow(int windowID) = 0;
     virtual bool JoystickPresent(int joyID) = 0;

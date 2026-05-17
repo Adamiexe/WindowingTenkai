@@ -10,6 +10,7 @@ private:
         KeyCallbackFn key;
         MouseBtnCallbackFn mouse;
         CursorPosCallbackFn cursor;
+        ScrollCallbackFn scroll;
     };
     std::vector<GLFWwindow*> windows;
     std::vector<WindowCallbacks> windowCallbacks;
@@ -47,6 +48,7 @@ public:
     void SetKeyCallback(int windowID, KeyCallbackFn callback) override;
     void SetMouseButtonCallback(int windowID, MouseBtnCallbackFn callback) override;
     void SetCursorPosCallback(int windowID, CursorPosCallbackFn callback) override;
+    void SetScrollCallback(int windowID, ScrollCallbackFn callback) override;
     void SetWindowShouldClose(int windowID, int value) override;
     void IconifyWindow(int windowID) override;
     bool JoystickPresent(int joyID) override;
