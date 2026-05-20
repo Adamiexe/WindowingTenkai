@@ -246,3 +246,17 @@ const unsigned char* GLFWWindowManager::GetJoystickButtons(int joyID, int* count
 {
     return glfwGetJoystickButtons(joyID, count);
 }
+
+void GLFWWindowManager::SetCursorVisible(int windowID, bool visible) {
+    if (windowID >= 0 && windowID < windows.size() && windows[windowID] != nullptr) {
+        int mode = visible ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_HIDDEN;
+        glfwSetInputMode(windows[windowID], GLFW_CURSOR, mode);
+    }
+}
+
+void GLFWWindowManager::SetCursorLocked(int windowID, bool locked) {
+    if (windowID >= 0 && windowID < windows.size() && windows[windowID] != nullptr) {
+        int mode = locked ? GLFW_CURSOR_DISABLED : GLFW_CURSOR_NORMAL;
+        glfwSetInputMode(windows[windowID], GLFW_CURSOR, mode);
+    }
+}

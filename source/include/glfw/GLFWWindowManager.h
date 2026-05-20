@@ -54,4 +54,6 @@ public:
     bool JoystickPresent(int joyID) override;
     const float* GetJoystickAxes(int joyID, int* count) override;
     const unsigned char* GetJoystickButtons(int joyID, int* count) override;
+    void SetCursorVisible(int windowID, bool visible) override;
+    void SetCursorLocked(int windowID, bool locked) override;
 };

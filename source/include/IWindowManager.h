@@ -46,6 +46,8 @@ public:
     virtual bool JoystickPresent(int joyID) = 0;
     virtual const float* GetJoystickAxes(int joyID, int* count) = 0;
     virtual const unsigned char* GetJoystickButtons(int joyID, int* count) = 0;
+    virtual void SetCursorVisible(int windowID, bool visible) = 0;
+    virtual void SetCursorLocked(int windowID, bool locked) = 0;
 };
 
 IWindowManager& GetWindowManager(PAPI api);
